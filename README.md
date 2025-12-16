@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+This repository contains a secure, real-time chat application built to showcase practical full-stack engineering skills with a strong focus on authentication, encryption, and real-time communication.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Deployed on Render
 
-## Available Scripts
+🗄️ Database
+PostgreSQL (Production)
 
-In the project directory, you can run:
+SQLite (Local development)
 
-### `npm start`
+✨ Application Features
+🔑 Authentication & Session Management
+Custom-built authentication flow
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+JWT-based Access & Refresh Tokens
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Access Token
 
-### `npm test`
+Short validity (15 minutes)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Required for all protected APIs & WebSockets
 
-### `npm run build`
+Refresh Token
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Valid for 7 days
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Stored securely as HTTP-only cookie
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Rotation mechanism implemented
 
-### `npm run eject`
+Logout revokes active sessions
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+💬 Messaging Capabilities
+👤 Private Chats
+Users can start one-to-one conversations
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Existing private chats are reused
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Messages delivered instantly via WebSockets
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+👥 Group Chats
+Create and manage group conversations
 
-## Learn More
+Join available public groups
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Persistent group message history
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Real-time updates for all members
 
-### Code Splitting
+🔒 Security & Data Protection
+All messages are encrypted using AES-256 before saving to the database
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+No plaintext messages are ever stored
 
-### Analyzing the Bundle Size
+Messages are decrypted only when sent to authorized clients
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Passwords are hashed using bcrypt
 
-### Making a Progressive Web App
+Token validation enforced across APIs and WebSockets
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+🧱 System Architecture
+🔷 High-Level Design
+pgsql
+Copy code
+React Client (Vite)
+        │
+        │ HTTPS (JWT)
+        ▼
+Django REST API Layer
+(Authentication & Chat APIs)
+        │
+        │ WebSocket (JWT-secured)
+        ▼
+Django Channels
+(Real-Time Messaging)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Deployed Frontend on vercel----
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://q-frontend-nu.vercel.app/
